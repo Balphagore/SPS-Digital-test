@@ -1,19 +1,17 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Spine.Unity;
+using AYellowpaper;
 
 namespace SPSDigital.Characters
 {
     public class Character : MonoBehaviour, IPointerDownHandler
     {
         [SerializeField]
-        private SkeletonAnimation skeletonAnimation;
+        private InterfaceReference<ICharacterAnimator,MonoBehaviour> characterAnimator;
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            Spine.AnimationState animationState = skeletonAnimation.AnimationState;
-
-            animationState.SetAnimation(0, "jump", true);
+            characterAnimator.Value.SetAttackTrigger();
         }
     }
 }
