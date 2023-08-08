@@ -1,7 +1,9 @@
+using UnityEngine;
+
 namespace SPSDigital.Characters
 {
     public interface ICharactersSystem
     {
-        void PlayerCharacterAction();
+        void PlayerCharacterAction(Vector2 position);
     }
 }

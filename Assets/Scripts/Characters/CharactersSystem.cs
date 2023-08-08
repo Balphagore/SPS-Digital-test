@@ -1,18 +1,18 @@
 using UnityEngine;
 using Zenject;
 
-using SPSDigital.UI;
+using SPSDigital.Player;
 
 namespace SPSDigital.Characters
 {
     public class CharactersSystem : MonoBehaviour, ICharactersSystem
     {
         [Inject]
-        private IUISystem uISystem;
+        private IPlayerSystem playerSystem;
 
-        public void PlayerCharacterAction()
+        public void PlayerCharacterAction(Vector2 position)
         {
-            uISystem.CreateFlyingImage();
+            playerSystem.AddCoins(1, position);
         }
     }
 }

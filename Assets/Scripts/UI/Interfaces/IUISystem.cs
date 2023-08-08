@@ -1,7 +1,11 @@
+using UnityEngine;
+
 namespace SPSDigital.UI
 {
     public interface IUISystem
     {
-        void CreateFlyingImage();
+        void SetCoinsValueText(int value);
+
+        void CreateFlyingCoin(int newValue, Vector2 spawnPosition);
     }
 }

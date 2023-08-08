@@ -9,13 +9,14 @@ namespace SPSDigital.Characters
     {
         [SerializeField]
         private InterfaceReference<ICharacterAnimator,MonoBehaviour> characterAnimator;
+
         [Inject]
         private ICharactersSystem charactersSystem;
 
         public void OnPointerDown(PointerEventData eventData)
         {
             characterAnimator.Value.SetAttackTrigger();
-            charactersSystem.PlayerCharacterAction();
+            charactersSystem.PlayerCharacterAction(transform.position);
         }
     }
 }
