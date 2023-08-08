@@ -14,7 +14,7 @@ namespace SPSDigital.UI
 
         void CreateCoin(int newValue, bool isNewItem);
 
-        void SetInventorySlotValue(int slotId, int slotLevel);
+        void SetInventorySlotValue(Sprite sprite, int slotId, int slotLevel);
 
         void SetCurrentItemValue(Sprite sprite, int itemLevel);
 

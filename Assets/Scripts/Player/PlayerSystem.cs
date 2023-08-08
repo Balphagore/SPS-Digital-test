@@ -1,10 +1,10 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 using SPSDigital.UI;
-using System.Collections;
 
 namespace SPSDigital.Player
 {
@@ -44,7 +44,7 @@ namespace SPSDigital.Player
             uISystem.DeactivateLootPanel();
             for (int i = 0; i < inventorySlots.Count; i++)
             {
-                uISystem.SetInventorySlotValue(i, inventorySlots[i].Level);
+                uISystem.SetInventorySlotValue(null, i, inventorySlots[i].Level);
             }
             uISystem.SetCurrentItemValue(null, 0);
             uISystem.SetNewItemValue(null, 0);
@@ -95,6 +95,9 @@ namespace SPSDigital.Player
                 delayedCoins.Add((coinsValue, false));
             }
             StartCoroutine(DelayedCoinCreation());
+
+            inventorySlots[currentItemIndex].Level = newItemLevel;
+            uISystem.SetInventorySlotValue(inventorySlots[currentItemIndex].Sprite, currentItemIndex, newItemLevel);
         }
 
         private IEnumerator DelayedCoinCreation()

@@ -27,7 +27,7 @@ namespace SPSDigital.UI
         private InterfaceReference<IInventorySlot, MonoBehaviour> newItem;
 
         [SerializeField, Range(0f, 5f)]
-        private float tweenDuration = 2f;
+        private float tweenDuration = 1f;
 
         public event IUISystem.EquipItemHandle EquipItemEvent;
         public event IUISystem.DropItemHandle DropItemEvent;
@@ -46,10 +46,11 @@ namespace SPSDigital.UI
             AnimateCoinFlight(Instantiate(coinPrefab, uICanvas), spawnPosition, target.position, newValue);
         }
 
-        public void SetInventorySlotValue(int slotId, int slotLevel)
+        public void SetInventorySlotValue(Sprite sprite, int slotId, int slotLevel)
         {
             IInventorySlot inventorySlot = inventorySlots[slotId].Value;
             inventorySlot.ActivateSlotImage(slotLevel > 0);
+            inventorySlot.SetSlotSprite(sprite);
             inventorySlot.SetSlotLevel(slotLevel);
         }
 
@@ -67,6 +68,7 @@ namespace SPSDigital.UI
         {
             IInventorySlot inventorySlot = currentItem.Value;
             inventorySlot.ActivateSlotImage(itemLevel > 0);
+            inventorySlot.SetSlotSprite(sprite);
             inventorySlot.SetSlotLevel(itemLevel);
         }
 
