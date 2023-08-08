@@ -8,7 +8,7 @@ namespace SPSDigital.Characters
     public class Character : MonoBehaviour, IPointerDownHandler
     {
         [SerializeField]
-        private InterfaceReference<ICharacterAnimator,MonoBehaviour> characterAnimator;
+        private InterfaceReference<ICharacterAnimator, MonoBehaviour> characterAnimator;
 
         [Inject]
         private ICharactersSystem charactersSystem;

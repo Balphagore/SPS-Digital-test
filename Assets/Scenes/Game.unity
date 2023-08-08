@@ -348,6 +348,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 1
+--- !u!114 &92332036 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2395075345546849739, guid: c8f0cca8ceac872409f0b62013c6cd22, type: 3}
+  m_PrefabInstance: {fileID: 1448498080}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5043c4c624896b84590d00ea3f1a7d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +610,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinsValue: 0
+  inventorySlots:
+  - Name: Slot 1
+    ItemType: 0
+    Level: 0
+  - Name: Slot 2
+    ItemType: 1
+    Level: 0
+  - Name: Slot 3
+    ItemType: 2
+    Level: 0
 --- !u!4 &516292652
 Transform:
   m_ObjectHideFlags: 0
@@ -643,6 +664,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7429244099611345384, guid: c8f0cca8ceac872409f0b62013c6cd22, type: 3}
   m_PrefabInstance: {fileID: 381601035}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &725698846 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2395075345546849739, guid: c8f0cca8ceac872409f0b62013c6cd22, type: 3}
+  m_PrefabInstance: {fileID: 381601035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5043c4c624896b84590d00ea3f1a7d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &772550769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1946,6 +1978,10 @@ MonoBehaviour:
   coinPrefab: {fileID: 5096844592760697050, guid: 0c0a7ec16d4badb499c62a45d883b5d7, type: 3}
   target: {fileID: 217876216}
   coinsValueText: {fileID: 603781481}
+  inventorySlots:
+  - _underlyingValue: {fileID: 725698846}
+  - _underlyingValue: {fileID: 1823835385}
+  - _underlyingValue: {fileID: 92332036}
   tweenDuration: 2
 --- !u!114 &1770634670
 MonoBehaviour:
@@ -1960,6 +1996,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uISystem: {fileID: 1770634669}
+--- !u!114 &1823835385 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2395075345546849739, guid: c8f0cca8ceac872409f0b62013c6cd22, type: 3}
+  m_PrefabInstance: {fileID: 772550769}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5043c4c624896b84590d00ea3f1a7d5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1871391848
 GameObject:
   m_ObjectHideFlags: 0
