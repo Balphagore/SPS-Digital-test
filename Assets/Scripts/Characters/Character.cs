@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using AYellowpaper;
+using Zenject;
 
 namespace SPSDigital.Characters
 {
@@ -8,10 +9,13 @@ namespace SPSDigital.Characters
     {
         [SerializeField]
         private InterfaceReference<ICharacterAnimator,MonoBehaviour> characterAnimator;
+        [Inject]
+        private ICharactersSystem charactersSystem;
 
         public void OnPointerDown(PointerEventData eventData)
         {
             characterAnimator.Value.SetAttackTrigger();
+            charactersSystem.PlayerCharacterAction();
         }
     }
 }

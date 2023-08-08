@@ -1637,6 +1637,7 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1319333801}
+  - {fileID: 1770634670}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -1776,6 +1777,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1770634668}
   - component: {fileID: 1770634669}
+  - component: {fileID: 1770634670}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1814,6 +1816,19 @@ MonoBehaviour:
   mainCanvas: {fileID: 1055360682}
   coinPrefab: {fileID: 5096844592760697050, guid: 0c0a7ec16d4badb499c62a45d883b5d7, type: 3}
   target: {fileID: 217876216}
+--- !u!114 &1770634670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770634667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9285c3cd69c97494dae6e47238088397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uISystem: {fileID: 1770634669}
 --- !u!1 &1871391848
 GameObject:
   m_ObjectHideFlags: 0

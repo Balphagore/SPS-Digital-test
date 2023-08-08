@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SPSDigital.UI
 {
-    public class UISystem : MonoBehaviour
+    public class UISystem : MonoBehaviour, IUISystem
     {
         [SerializeField]
         private Transform mainCanvas;
@@ -11,11 +11,6 @@ namespace SPSDigital.UI
         private Transform coinPrefab;
         [SerializeField]
         private Transform target;
-
-        private void Start()
-        {
-            AnimateImageFlight(Instantiate(coinPrefab, mainCanvas), Vector2.zero, target.position);
-        }
 
         private void AnimateImageFlight(Transform image, Vector2 starSpawnPosition, Vector2 targetPosition)
         {
@@ -27,6 +22,11 @@ namespace SPSDigital.UI
                 DOTween.Kill(image);
                 Destroy(image.gameObject);
             });
+        }
+
+        public void CreateFlyingImage()
+        {
+            AnimateImageFlight(Instantiate(coinPrefab, mainCanvas), Vector2.zero, target.position);
         }
     }
 }
