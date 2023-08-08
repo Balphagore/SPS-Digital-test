@@ -12,13 +12,28 @@ namespace SPSDigital.Player
         private int coinsValue = 0;
         [SerializeField]
         List<InventorySlotDataModel> inventorySlots;
+        [SerializeField]
+        private bool isLootActivated;
 
         [Inject]
         private IUISystem uISystem;
 
+        private void OnEnable()
+        {
+            uISystem.DropItemEvent += OnDropItemEvent;
+            uISystem.EquipItemEvent += OnEquipItemEvent;
+        }
+
+        private void OnDisable()
+        {
+            uISystem.DropItemEvent -= OnDropItemEvent;
+            uISystem.EquipItemEvent -= OnEquipItemEvent;
+        }
+
         private void Awake()
         {
             uISystem.SetCoinsValueText(coinsValue);
+            uISystem.DeactivateLootPanel();
             for (int i = 0; i < inventorySlots.Count; i++)
             {
                 uISystem.SetInventorySlotValue(i, inventorySlots[i].Level);
@@ -33,6 +48,25 @@ namespace SPSDigital.Player
             {
                 uISystem.SetInventorySlotValue(i, 1);
             }
+        }
+
+        public void ActivateLoot()
+        {
+            if(!isLootActivated)
+            {
+                isLootActivated = true;
+                uISystem.ActivateLootPanel();
+            }
+        }
+
+        private void OnDropItemEvent()
+        {
+            isLootActivated = false;
+        }
+
+        private void OnEquipItemEvent()
+        {
+            isLootActivated = false;
         }
     }
 }
