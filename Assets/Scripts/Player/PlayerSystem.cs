@@ -46,8 +46,8 @@ namespace SPSDigital.Player
             {
                 uISystem.SetInventorySlotValue(null, i, inventorySlots[i].Level);
             }
-            uISystem.SetCurrentItemValue(null, 0);
-            uISystem.SetNewItemValue(null, 0);
+            uISystem.SetLootItemValue(null, 0, null, false, false);
+            uISystem.SetLootItemValue(null, 0, null, true, false);
             delayedCoins = new();
         }
 
@@ -59,25 +59,25 @@ namespace SPSDigital.Player
 
         public void ActivateLoot()
         {
-            if(!isLootActivated)
+            if (!isLootActivated)
             {
                 isLootActivated = true;
                 uISystem.ActivateLootPanel();
                 int itemIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(EItemType)).Length);
                 currentItemIndex = itemIndex;
+                InventorySlotDataModel inventorySlotData = inventorySlots[itemIndex];
 
-                uISystem.SetCurrentItemValue(inventorySlots[itemIndex].Sprite, inventorySlots[itemIndex].Level);
+                uISystem.SetLootItemValue(inventorySlotData.Sprite, inventorySlotData.Level, inventorySlotData.StatName, false, false);
 
                 int itemLevel = UnityEngine.Random.Range(1, 16);
                 newItemLevel = itemLevel;
 
-                uISystem.SetNewItemValue(inventorySlots[itemIndex].Sprite, itemLevel);
+                uISystem.SetLootItemValue(inventorySlotData.Sprite, itemLevel, inventorySlotData.StatName, true, itemLevel > inventorySlotData.Level);
             }
         }
 
         private void OnDropItemEvent()
         {
-            isLootActivated = false;
             for (int i = 0; i < newItemLevel; i++)
             {
                 coinsValue++;
@@ -88,7 +88,6 @@ namespace SPSDigital.Player
 
         private void OnEquipItemEvent()
         {
-            isLootActivated = false;
             for (int i = 0; i < inventorySlots[currentItemIndex].Level; i++)
             {
                 coinsValue++;
@@ -108,6 +107,8 @@ namespace SPSDigital.Player
                 delayedCoins.RemoveAt(0);
                 yield return new WaitForSeconds(0.1f);
             }
+            isLootActivated = false;
+            uISystem.DeactivateLootPanel();
         }
     }
 }

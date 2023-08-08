@@ -24,7 +24,15 @@ namespace SPSDigital.UI
         [SerializeField]
         private InterfaceReference<IInventorySlot, MonoBehaviour> currentItem;
         [SerializeField]
+        private TextMeshProUGUI currentItemStatText;
+        [SerializeField]
         private InterfaceReference<IInventorySlot, MonoBehaviour> newItem;
+        [SerializeField]
+        private TextMeshProUGUI newItemStatText;
+        [SerializeField]
+        private GameObject greenArrow;
+        [SerializeField]
+        private GameObject redArrow;
 
         [SerializeField, Range(0f, 5f)]
         private float tweenDuration = 1f;
@@ -64,32 +72,32 @@ namespace SPSDigital.UI
             lootPanel.SetActive(false);
         }
 
-        public void SetCurrentItemValue(Sprite sprite, int itemLevel)
+        public void SetLootItemValue(Sprite sprite, int itemLevel, string statName, bool isNewItem, bool isBetter)
         {
-            IInventorySlot inventorySlot = currentItem.Value;
+            IInventorySlot inventorySlot = isNewItem ? newItem.Value : currentItem.Value;
             inventorySlot.ActivateSlotImage(itemLevel > 0);
             inventorySlot.SetSlotSprite(sprite);
             inventorySlot.SetSlotLevel(itemLevel);
-        }
-
-        public void SetNewItemValue(Sprite sprite, int itemLevel)
-        {
-            IInventorySlot inventorySlot = newItem.Value;
-            inventorySlot.ActivateSlotImage(itemLevel > 0);
-            inventorySlot.SetSlotSprite(sprite);
-            inventorySlot.SetSlotLevel(itemLevel);
+            if (isNewItem)
+            {
+                newItemStatText.text = statName + ": " + itemLevel;
+                greenArrow.SetActive(isBetter);
+                redArrow.SetActive(!isBetter);
+            }
+            else
+            {
+                currentItemStatText.text = statName + ": " + itemLevel;
+            }
         }
 
         public void OnDropButtonClick()
         {
             DropItemEvent?.Invoke();
-            DeactivateLootPanel();
         }
 
         public void OnEquipButtonClick()
         {
             EquipItemEvent?.Invoke();
-            DeactivateLootPanel();
         }
 
         private void AnimateCoinFlight(Transform image, Vector2 spawnPosition, Vector2 targetPosition, int newValue)

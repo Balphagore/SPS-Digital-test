@@ -16,9 +16,7 @@ namespace SPSDigital.UI
 
         void SetInventorySlotValue(Sprite sprite, int slotId, int slotLevel);
 
-        void SetCurrentItemValue(Sprite sprite, int itemLevel);
-
-        void SetNewItemValue(Sprite sprite, int itemLevel);
+        void SetLootItemValue(Sprite sprite, int itemLevel, string statName, bool isNewItem, bool isBetter);
 
         void ActivateLootPanel();
 

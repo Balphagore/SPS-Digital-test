@@ -8,6 +8,7 @@ namespace SPSDigital.Player
     {
         public string Name;
         public EItemType ItemType;
+        public string StatName;
         public int Level;
         public Sprite Sprite;
     }
