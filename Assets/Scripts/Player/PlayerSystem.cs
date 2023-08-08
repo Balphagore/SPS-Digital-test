@@ -1,5 +1,6 @@
-using UnityEngine;
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 
 using SPSDigital.UI;
@@ -38,16 +39,14 @@ namespace SPSDigital.Player
             {
                 uISystem.SetInventorySlotValue(i, inventorySlots[i].Level);
             }
+            uISystem.SetCurrentItemValue(null, 0);
+            uISystem.SetNewItemValue(null, 0);
         }
 
         public void AddCoins(int value, Vector2 spawnPosition)
         {
             coinsValue += value;
             uISystem.CreateFlyingCoin(coinsValue, spawnPosition);
-            for (int i = 0; i < inventorySlots.Count; i++)
-            {
-                uISystem.SetInventorySlotValue(i, 1);
-            }
         }
 
         public void ActivateLoot()
@@ -56,6 +55,13 @@ namespace SPSDigital.Player
             {
                 isLootActivated = true;
                 uISystem.ActivateLootPanel();
+                int itemIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(EItemType)).Length);
+
+                uISystem.SetCurrentItemValue(inventorySlots[itemIndex].Sprite, inventorySlots[itemIndex].Level);
+
+                int itemLevel = UnityEngine.Random.Range(1, 16);
+
+                uISystem.SetNewItemValue(inventorySlots[itemIndex].Sprite, itemLevel);
             }
         }
 

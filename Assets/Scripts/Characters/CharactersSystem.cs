@@ -12,7 +12,6 @@ namespace SPSDigital.Characters
 
         public void PlayerCharacterAction(Vector2 position)
         {
-            playerSystem.AddCoins(1, position);
             playerSystem.ActivateLoot();
         }
     }

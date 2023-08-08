@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace SPSDigital.Player
 {
@@ -8,5 +9,6 @@ namespace SPSDigital.Player
         public string Name;
         public EItemType ItemType;
         public int Level;
+        public Sprite Sprite;
     }
 }

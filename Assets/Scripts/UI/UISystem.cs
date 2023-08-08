@@ -21,6 +21,10 @@ namespace SPSDigital.UI
         private GameObject lootPanel;
         [SerializeField]
         private List<InterfaceReference<IInventorySlot, MonoBehaviour>> inventorySlots;
+        [SerializeField]
+        private InterfaceReference<IInventorySlot, MonoBehaviour> currentItem;
+        [SerializeField]
+        private InterfaceReference<IInventorySlot, MonoBehaviour> newItem;
 
         [SerializeField, Range(0f, 5f)]
         private float tweenDuration = 2f;
@@ -53,6 +57,21 @@ namespace SPSDigital.UI
         public void DeactivateLootPanel()
         {
             lootPanel.SetActive(false);
+        }
+
+        public void SetCurrentItemValue(Sprite sprite, int itemLevel)
+        {
+            IInventorySlot inventorySlot = currentItem.Value;
+            inventorySlot.ActivateSlotImage(itemLevel > 0);
+            inventorySlot.SetSlotLevel(itemLevel);
+        }
+
+        public void SetNewItemValue(Sprite sprite, int itemLevel)
+        {
+            IInventorySlot inventorySlot = newItem.Value;
+            inventorySlot.ActivateSlotImage(itemLevel > 0);
+            inventorySlot.SetSlotSprite(sprite);
+            inventorySlot.SetSlotLevel(itemLevel);
         }
 
         public void OnDropButtonClick()
