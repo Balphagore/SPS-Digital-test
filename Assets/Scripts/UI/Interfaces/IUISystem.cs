@@ -12,7 +12,7 @@ namespace SPSDigital.UI
 
         void SetCoinsValueText(int value);
 
-        void CreateFlyingCoin(int newValue, Vector2 spawnPosition);
+        void CreateCoin(int newValue, bool isNewItem);
 
         void SetInventorySlotValue(int slotId, int slotLevel);
 

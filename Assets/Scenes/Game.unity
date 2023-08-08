@@ -348,6 +348,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 1
+--- !u!224 &87266928 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2781528930145625143, guid: 7b13f7aae261e29478a53c64a81c8f43, type: 3}
+  m_PrefabInstance: {fileID: 1616439365}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &92332036 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2395075345546849739, guid: c8f0cca8ceac872409f0b62013c6cd22, type: 3}
@@ -805,6 +810,8 @@ MonoBehaviour:
     Level: 0
     Sprite: {fileID: 21300000, guid: b53db54545fcd5747b7ba5e450c07baf, type: 3}
   isLootActivated: 0
+  currentItemIndex: -1
+  newItemLevel: 0
 --- !u!4 &516292652
 Transform:
   m_ObjectHideFlags: 0
@@ -2686,7 +2693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 5096844592760697050, guid: 0c0a7ec16d4badb499c62a45d883b5d7, type: 3}
-  target: {fileID: 217876216}
+  target: {fileID: 87266928}
   uICanvas: {fileID: 1055360682}
   coinsValueText: {fileID: 603781481}
   lootPanel: {fileID: 2129780109}

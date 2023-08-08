@@ -4,6 +4,7 @@ using UnityEngine;
 using Zenject;
 
 using SPSDigital.UI;
+using System.Collections;
 
 namespace SPSDigital.Player
 {
@@ -15,6 +16,12 @@ namespace SPSDigital.Player
         List<InventorySlotDataModel> inventorySlots;
         [SerializeField]
         private bool isLootActivated;
+        [SerializeField]
+        private int currentItemIndex = -1;
+        [SerializeField]
+        private int newItemLevel = 0;
+        [SerializeField]
+        private List<(int value, bool isNewItem)> delayedCoins;
 
         [Inject]
         private IUISystem uISystem;
@@ -41,12 +48,13 @@ namespace SPSDigital.Player
             }
             uISystem.SetCurrentItemValue(null, 0);
             uISystem.SetNewItemValue(null, 0);
+            delayedCoins = new();
         }
 
         public void AddCoins(int value, Vector2 spawnPosition)
         {
             coinsValue += value;
-            uISystem.CreateFlyingCoin(coinsValue, spawnPosition);
+            uISystem.CreateCoin(coinsValue, false);
         }
 
         public void ActivateLoot()
@@ -56,10 +64,12 @@ namespace SPSDigital.Player
                 isLootActivated = true;
                 uISystem.ActivateLootPanel();
                 int itemIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(EItemType)).Length);
+                currentItemIndex = itemIndex;
 
                 uISystem.SetCurrentItemValue(inventorySlots[itemIndex].Sprite, inventorySlots[itemIndex].Level);
 
                 int itemLevel = UnityEngine.Random.Range(1, 16);
+                newItemLevel = itemLevel;
 
                 uISystem.SetNewItemValue(inventorySlots[itemIndex].Sprite, itemLevel);
             }
@@ -68,11 +78,33 @@ namespace SPSDigital.Player
         private void OnDropItemEvent()
         {
             isLootActivated = false;
+            for (int i = 0; i < newItemLevel; i++)
+            {
+                coinsValue++;
+                delayedCoins.Add((coinsValue,true));
+            }
+            StartCoroutine(DelayedCoinCreation());
         }
 
         private void OnEquipItemEvent()
         {
             isLootActivated = false;
+            for (int i = 0; i < inventorySlots[currentItemIndex].Level; i++)
+            {
+                coinsValue++;
+                delayedCoins.Add((coinsValue, false));
+            }
+            StartCoroutine(DelayedCoinCreation());
+        }
+
+        private IEnumerator DelayedCoinCreation()
+        {
+            while(delayedCoins.Count > 0)
+            {
+                uISystem.CreateCoin(delayedCoins[0].value, delayedCoins[0].isNewItem);
+                delayedCoins.RemoveAt(0);
+                yield return new WaitForSeconds(0.1f);
+            }
         }
     }
 }

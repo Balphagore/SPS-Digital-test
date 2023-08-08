@@ -37,9 +37,13 @@ namespace SPSDigital.UI
             coinsValueText.text = value.ToString();
         }
 
-        public void CreateFlyingCoin(int newValue, Vector2 position)
+        public void CreateCoin(int newValue, bool isNewItem)
         {
-            AnimateCoinFlight(Instantiate(coinPrefab, uICanvas), position, target.position, newValue);
+            Vector2 spawnPosition = isNewItem ? 
+                newItem.UnderlyingValue.gameObject.transform.position : 
+                currentItem.UnderlyingValue.gameObject.transform.position;
+
+            AnimateCoinFlight(Instantiate(coinPrefab, uICanvas), spawnPosition, target.position, newValue);
         }
 
         public void SetInventorySlotValue(int slotId, int slotLevel)
