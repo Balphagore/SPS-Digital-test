@@ -46,11 +46,11 @@ namespace SPSDigital.Player
             uISystem.DeactivateLootPanel();
             for (int i = 0; i < inventorySlots.Count; i++)
             {
-                uISystem.SetInventorySlotValue(null, i, inventorySlots[i].Level);
+                uISystem.SetInventorySlotValue(null, i, inventorySlots[i].Level, inventorySlots[i].ItemType.ToString());
                 uISystem.SetStatValue(i, inventorySlots[i].StatName + ": " + inventorySlots[i].Level);
             }
-            uISystem.SetLootItemValue(null, 0, null, false, false);
-            uISystem.SetLootItemValue(null, 0, null, true, false);
+            uISystem.SetLootItemValue(null, 0, null, false, false, null);
+            uISystem.SetLootItemValue(null, 0, null, true, false, null);
             delayedCoins = new();
         }
 
@@ -90,12 +90,26 @@ namespace SPSDigital.Player
                 currentItemIndex = itemIndex;
                 InventorySlotDataModel inventorySlotData = inventorySlots[itemIndex];
 
-                uISystem.SetLootItemValue(inventorySlotData.Sprite, inventorySlotData.Level, inventorySlotData.StatName, false, false);
+                uISystem.SetLootItemValue(
+                    inventorySlotData.Sprite, 
+                    inventorySlotData.Level, 
+                    inventorySlotData.StatName, 
+                    false, 
+                    false, 
+                    inventorySlotData.ItemType.ToString()
+                    );
 
                 int itemLevel = UnityEngine.Random.Range(1, 16);
                 newItemLevel = itemLevel;
 
-                uISystem.SetLootItemValue(inventorySlotData.Sprite, itemLevel, inventorySlotData.StatName, true, itemLevel > inventorySlotData.Level);
+                uISystem.SetLootItemValue(
+                    inventorySlotData.Sprite, 
+                    itemLevel, 
+                    inventorySlotData.StatName, 
+                    true, 
+                    itemLevel > inventorySlotData.Level, 
+                    inventorySlotData.ItemType.ToString()
+                    );
             }
         }
 
@@ -119,7 +133,12 @@ namespace SPSDigital.Player
             StartCoroutine(DelayedCoinCreation());
 
             inventorySlots[currentItemIndex].Level = newItemLevel;
-            uISystem.SetInventorySlotValue(inventorySlots[currentItemIndex].Sprite, currentItemIndex, newItemLevel);
+            uISystem.SetInventorySlotValue(
+                inventorySlots[currentItemIndex].Sprite, 
+                currentItemIndex, 
+                newItemLevel, 
+                inventorySlots[currentItemIndex].ItemType.ToString()
+                );
             uISystem.SetStatValue(currentItemIndex, inventorySlots[currentItemIndex].StatName + ": " + inventorySlots[currentItemIndex].Level);
         }
 

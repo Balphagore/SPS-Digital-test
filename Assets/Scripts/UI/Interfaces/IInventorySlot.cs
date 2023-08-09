@@ -4,7 +4,7 @@ namespace SPSDigital.UI
 {
     public interface IInventorySlot
     {
-        void SetSlotLevel(int level);
+        void SetSlotLevel(int level, string type);
 
         void SetSlotSprite(Sprite sprite);
 

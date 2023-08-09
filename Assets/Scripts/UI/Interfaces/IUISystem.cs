@@ -14,9 +14,9 @@ namespace SPSDigital.UI
 
         void CreateCoin(int newValue, bool isNewItem);
 
-        void SetInventorySlotValue(Sprite sprite, int slotId, int slotLevel);
+        void SetInventorySlotValue(Sprite sprite, int slotId, int slotLevel, string type);
 
-        void SetLootItemValue(Sprite sprite, int itemLevel, string statName, bool isNewItem, bool isBetter);
+        void SetLootItemValue(Sprite sprite, int itemLevel, string statName, bool isNewItem, bool isBetter, string type);
 
         void ActivateLootPanel();
 

@@ -10,6 +10,8 @@ namespace SPSDigital.UI
         private Image slotImage;
         [SerializeField]
         private TextMeshProUGUI slotText;
+        [SerializeField]
+        private TextMeshProUGUI typeText;
 
         public void ActivateSlotImage(bool isActive)
         {
@@ -21,8 +23,9 @@ namespace SPSDigital.UI
             slotImage.sprite = sprite;
         }
 
-        public void SetSlotLevel(int level)
+        public void SetSlotLevel(int level, string type)
         {
+            typeText.text = type;
             if (level > 0)
             {
                 slotText.enabled = true;

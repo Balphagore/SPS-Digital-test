@@ -56,12 +56,12 @@ namespace SPSDigital.UI
             AnimateCoinFlight(Instantiate(coinPrefab, uICanvas), spawnPosition, target.position, newValue);
         }
 
-        public void SetInventorySlotValue(Sprite sprite, int slotId, int slotLevel)
+        public void SetInventorySlotValue(Sprite sprite, int slotId, int slotLevel, string type)
         {
             IInventorySlot inventorySlot = inventorySlots[slotId].Value;
             inventorySlot.ActivateSlotImage(slotLevel > 0);
             inventorySlot.SetSlotSprite(sprite);
-            inventorySlot.SetSlotLevel(slotLevel);
+            inventorySlot.SetSlotLevel(slotLevel, type);
         }
 
         public void ActivateLootPanel()
@@ -74,12 +74,12 @@ namespace SPSDigital.UI
             lootPanel.SetActive(false);
         }
 
-        public void SetLootItemValue(Sprite sprite, int itemLevel, string statName, bool isNewItem, bool isBetter)
+        public void SetLootItemValue(Sprite sprite, int itemLevel, string statName, bool isNewItem, bool isBetter, string type)
         {
             IInventorySlot inventorySlot = isNewItem ? newItem.Value : currentItem.Value;
             inventorySlot.ActivateSlotImage(itemLevel > 0);
             inventorySlot.SetSlotSprite(sprite);
-            inventorySlot.SetSlotLevel(itemLevel);
+            inventorySlot.SetSlotLevel(itemLevel, type);
             if (isNewItem)
             {
                 newItemStatText.text = statName + ": " + itemLevel;
