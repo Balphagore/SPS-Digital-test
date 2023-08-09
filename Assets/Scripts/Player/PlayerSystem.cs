@@ -80,7 +80,6 @@ namespace SPSDigital.Player
 
                 if (consecutiveCount >= 4)
                 {
-                    Debug.LogWarning(consecutiveCount);
                     while (itemIndex == currentItemIndex)
                     {
                         itemIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(EItemType)).Length);
