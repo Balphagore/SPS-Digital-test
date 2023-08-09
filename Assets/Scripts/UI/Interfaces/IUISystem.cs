@@ -21,5 +21,7 @@ namespace SPSDigital.UI
         void ActivateLootPanel();
 
         void DeactivateLootPanel();
+
+        void SetStatValue(int statId, string statValue);
     }
 }

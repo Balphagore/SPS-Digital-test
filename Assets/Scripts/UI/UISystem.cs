@@ -33,6 +33,8 @@ namespace SPSDigital.UI
         private GameObject greenArrow;
         [SerializeField]
         private GameObject redArrow;
+        [SerializeField]
+        private List<TextMeshProUGUI> playerStats;
 
         [SerializeField, Range(0f, 5f)]
         private float tweenDuration = 1f;
@@ -47,8 +49,8 @@ namespace SPSDigital.UI
 
         public void CreateCoin(int newValue, bool isNewItem)
         {
-            Vector2 spawnPosition = isNewItem ? 
-                newItem.UnderlyingValue.gameObject.transform.position : 
+            Vector2 spawnPosition = isNewItem ?
+                newItem.UnderlyingValue.gameObject.transform.position :
                 currentItem.UnderlyingValue.gameObject.transform.position;
 
             AnimateCoinFlight(Instantiate(coinPrefab, uICanvas), spawnPosition, target.position, newValue);
@@ -111,6 +113,11 @@ namespace SPSDigital.UI
                 DOTween.Kill(image);
                 Destroy(image.gameObject);
             });
+        }
+
+        public void SetStatValue(int statId, string statValue)
+        {
+            playerStats[statId].text = statValue;
         }
     }
 }

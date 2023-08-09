@@ -22,6 +22,8 @@ namespace SPSDigital.Player
         private int newItemLevel = 0;
         [SerializeField]
         private List<(int value, bool isNewItem)> delayedCoins;
+        [SerializeField]
+        private int consecutiveCount = 0;
 
         [Inject]
         private IUISystem uISystem;
@@ -45,6 +47,7 @@ namespace SPSDigital.Player
             for (int i = 0; i < inventorySlots.Count; i++)
             {
                 uISystem.SetInventorySlotValue(null, i, inventorySlots[i].Level);
+                uISystem.SetStatValue(i, inventorySlots[i].StatName + ": " + inventorySlots[i].Level);
             }
             uISystem.SetLootItemValue(null, 0, null, false, false);
             uISystem.SetLootItemValue(null, 0, null, true, false);
@@ -63,7 +66,28 @@ namespace SPSDigital.Player
             {
                 isLootActivated = true;
                 uISystem.ActivateLootPanel();
+
                 int itemIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(EItemType)).Length);
+
+                if (itemIndex == currentItemIndex)
+                {
+                    consecutiveCount++;
+                }
+                else
+                {
+                    consecutiveCount = 1;
+                }
+
+                if (consecutiveCount >= 4)
+                {
+                    Debug.LogWarning(consecutiveCount);
+                    while (itemIndex == currentItemIndex)
+                    {
+                        itemIndex = UnityEngine.Random.Range(0, Enum.GetValues(typeof(EItemType)).Length);
+                    }
+                    consecutiveCount = 1;
+                }
+
                 currentItemIndex = itemIndex;
                 InventorySlotDataModel inventorySlotData = inventorySlots[itemIndex];
 
@@ -97,6 +121,7 @@ namespace SPSDigital.Player
 
             inventorySlots[currentItemIndex].Level = newItemLevel;
             uISystem.SetInventorySlotValue(inventorySlots[currentItemIndex].Sprite, currentItemIndex, newItemLevel);
+            uISystem.SetStatValue(currentItemIndex, inventorySlots[currentItemIndex].StatName + ": " + inventorySlots[currentItemIndex].Level);
         }
 
         private IEnumerator DelayedCoinCreation()
